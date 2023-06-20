@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/iHome"
+        android:icon="@drawable/ic_home"
+        android:title="Home"/>
+
+
+    <item
+        android:id="@+id/iMessage"
+        android:icon="@drawable/ic_messages"
+        android:title="Messages"/>
+
+
+    <item
+        android:id="@+id/iProfile"
+        android:icon="@drawable/ic_profile"
+        android:title="Profile"/>
+</menu>

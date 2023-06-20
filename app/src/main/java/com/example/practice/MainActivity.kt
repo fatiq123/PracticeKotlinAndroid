@@ -10,60 +10,80 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
+import android.widget.Toolbar
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var bottomNavigationView: BottomNavigationView
 
-    private val firstFragment = FirstFragment()
-    private val secondFragment = SecondFragment()
-    private val thirdFragment = ThirdFragment()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        switchFragment(firstFragment)
 
-        val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener{
-            when (it.itemId){
-                R.id.miHome -> {
-                    switchFragment(firstFragment)
-                    return@OnNavigationItemSelectedListener true
-                }
-                R.id.miMessage -> {
-                    switchFragment(secondFragment)
-                    return@OnNavigationItemSelectedListener true
-                }
-                R.id.miProfile -> {
-                    switchFragment(thirdFragment)
-                    return@OnNavigationItemSelectedListener true
-                }
-            }
-            false
+        drawerLayout = findViewById(R.id.drawer_layout)
+        bottomNavigationView = findViewById(R.id.bottom_navigation_view)
+        val firstFragment = FirstFragment()
+        val secondFragment = SecondFragment()
+        val thirdFragment = ThirdFragment()
+
+
+        val navigationView: NavigationView = findViewById(R.id.navigation_view)
+
+        val toggle = ActionBarDrawerToggle(
+            this, drawerLayout, R.string.open, R.string.close
+        )
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
+
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            // Handle menu item clicks here
+
+            drawerLayout.closeDrawers()
+            true
         }
 
-        val navigation: BottomNavigationView = findViewById(R.id.bottomNavigationView)
-        navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+        bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.miHome -> {
+                    // Handle item 1 click
+                    firstFragment
+                    Toast.makeText(this, "Home button pressed", Toast.LENGTH_SHORT).show()
+                    true
+                }
 
+                R.id.miMessage -> {
+                    // Handle item 2 click
+                    Toast.makeText(this, "Message button pressed", Toast.LENGTH_SHORT).show()
+                    true
+                }
 
-        // to display badges on message icon
-        addBadges(navigation,R.id.miMessage,5)
+                R.id.miProfile -> {
+                    Toast.makeText(this, "Profile button pressed", Toast.LENGTH_SHORT).show()
+                    // Handle item 2 click
+                    true
+                }
+                // Add more menu item cases as needed
+                else -> false
+            }
+        }
     }
 
-
-    private fun switchFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.flFragment, fragment)
-            .commit()
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
     }
 
-    private fun addBadges(navigation: BottomNavigationView, itemId: Int, count: Int) {
-        val badge = navigation.getOrCreateBadge(itemId)
-        badge.number = count
-        badge.badgeTextColor = ContextCompat.getColor(this,R.color.badge_color)
-        badge.backgroundColor = ContextCompat.getColor(this,android.R.color.white)
-        badge.isVisible = true
-    }
 }
