@@ -56,20 +56,22 @@ class MainActivity : AppCompatActivity() {
             when (menuItem.itemId) {
                 R.id.miHome -> {
                     // Handle item 1 click
-                    firstFragment
-                    Toast.makeText(this, "Home button pressed", Toast.LENGTH_SHORT).show()
+                    switchFragment(firstFragment)
+//                    Toast.makeText(this, "Home button pressed", Toast.LENGTH_SHORT).show()
                     true
                 }
 
                 R.id.miMessage -> {
                     // Handle item 2 click
-                    Toast.makeText(this, "Message button pressed", Toast.LENGTH_SHORT).show()
+                    switchFragment(secondFragment)
+//                    Toast.makeText(this, "Message button pressed", Toast.LENGTH_SHORT).show()
                     true
                 }
 
                 R.id.miProfile -> {
-                    Toast.makeText(this, "Profile button pressed", Toast.LENGTH_SHORT).show()
-                    // Handle item 2 click
+                    // Handle item 3 click
+                    switchFragment(thirdFragment)
+//                    Toast.makeText(this, "Profile button pressed", Toast.LENGTH_SHORT).show()
                     true
                 }
                 // Add more menu item cases as needed
@@ -84,6 +86,12 @@ class MainActivity : AppCompatActivity() {
         } else {
             super.onBackPressed()
         }
+    }
+
+    private fun switchFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.flFragment,fragment)
+            .commit()
     }
 
 }
