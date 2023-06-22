@@ -20,8 +20,7 @@
             android:layout_height="96dp"
             android:src="@drawable/profile_pic"
             android:scaleType="centerCrop"
-            android:contentDescription="Profile Picture"
-            android:background="@drawable/circle_image_view"/>
+            android:contentDescription="Profile Picture" />
 
         <TextView
             android:id="@+id/nameTextView"
