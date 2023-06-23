@@ -3,6 +3,7 @@ package com.example.practice
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -48,21 +49,21 @@ class MainActivity : AppCompatActivity() {
                 R.id.miHome -> {
                     // Handle item 1 click
                     switchFragment(firstFragment)
-//                    Toast.makeText(this, "Home button pressed", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Home button pressed", Toast.LENGTH_SHORT).show()
                     true
                 }
 
                 R.id.miMessage -> {
                     // Handle item 2 click
                     switchFragment(secondFragment)
-//                    Toast.makeText(this, "Message button pressed", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Message button pressed", Toast.LENGTH_SHORT).show()
                     true
                 }
 
                 R.id.miProfile -> {
                     // Handle item 3 click
                     switchFragment(thirdFragment)
-//                    Toast.makeText(this, "Profile button pressed", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Profile button pressed", Toast.LENGTH_SHORT).show()
                     true
                 }
                 // Add more menu item cases as needed
